@@ -1,7 +1,7 @@
 {
-  "name": "login-app",
+  "name": "meetinapp",
   "version": "1.0.0",
-  "description": "app to exemplify login",
+  "description": "",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -9,11 +9,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "async": "^2.1.4",
     "bluebird": "^3.4.6",
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
-    "mongoose": "^4.7.1",
-    "mongoose-hidden": "^0.7.0",
-    "path": "^0.12.7"
+    "mongoose": "^4.7.2",
+    "path": "^0.12.7",
+    "swig": "^1.4.2"
   }
 }

@@ -7,17 +7,31 @@ var mongoose = require("mongoose");
 mongoose.Promise = Promise;
 
 var path = require('path');
-var controller = require('./controllers/user.controller');
 
 var port = 8080;
 
+var routes = require('./routes/index');
+
 // connection://url:port/dbName
-var db = 'mongodb://localhost/userExample';
+var db = 'mongodb://localhost/meetingApp';
 
 mongoose.connect(db);
 
+// Set up view engine
+var swig = require('swig');
+app.engine('html',swig.renderFile);
+
 //Locate and recognize a certain set of files within the project
-app.use(express.static(path.join(__dirname,'views')));
+//If we do not have a view engine = app.use(express.static(path.join(__dirname,'views')));
+//Apply to any other engine
+app.set('views',path.join(__dirname,"views"));
+app.set('view engine','html');
+
+//Tell express to look in public folder
+app.use(express.static(path.join(__dirname,'public')));
+
+//To use routes
+app.use('/',routes);
 
 //To understand json
 app.use(bodyParser.json());
@@ -26,13 +40,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
-
-//ROUTES
-app.get('/',function (req, res) {
-    res.render('index.html');
-});
-
-app.post('/', controller.register);
 
 app.listen(port,function () {
     console.log("App listening on port:" + port);
